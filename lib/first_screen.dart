@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 List<String> locations = [
@@ -107,6 +105,10 @@ class _FirstScreenState extends State<FirstScreen> {
                   'Sign up for the newspaper and related articles',
                   style: TextStyle(fontSize: 14),
                 ),
+              ),
+              ElevatedButton(
+                onPressed: () {},
+                child: Text('Register'),
               ),
             ],
           ),
