@@ -8,9 +8,13 @@ class SecondFile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       color: Colors.yellow,
-      child: Text(
-        generateRandomNumbers(),
-        textDirection: TextDirection.ltr,
+      child: Container(
+        height: 500.0,
+        width: 300.0,
+        child: Text(
+          generateRandomNumbers(),
+          textDirection: TextDirection.ltr,
+        ), 
       ),
     );
   }
