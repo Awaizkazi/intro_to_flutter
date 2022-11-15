@@ -19,7 +19,7 @@ class FirstScreen extends StatefulWidget {
 
 class _FirstScreenState extends State<FirstScreen> {
   String maritalStatus = 'single';
-  bool isChecked = true;
+  bool isChecked = false;
   String dropdownValue = locations.first;
   @override
   Widget build(BuildContext context) {
@@ -98,7 +98,11 @@ class _FirstScreenState extends State<FirstScreen> {
               CheckboxListTile(
                 value: isChecked,
                 controlAffinity: ListTileControlAffinity.leading,
-                onChanged: ((value) {}),
+                onChanged: ((value) {
+                  setState(() {
+                    isChecked = !isChecked;
+                  });
+                }),
                 title: Text(
                   'Sign up for the newspaper and related articles',
                   style: TextStyle(fontSize: 14),
