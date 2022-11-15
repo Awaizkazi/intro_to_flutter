@@ -23,7 +23,12 @@ class SecondFile extends StatelessWidget {
         ),
         child: GestureDetector(
           onTap: (() {
-            final message = SnackBar(content: Text('This is a SnackBar '));
+            final message = SnackBar(
+                content: const Text(
+                  'This is a SnackBar ',
+                ),
+                action: SnackBarAction(label: 'Undo', onPressed: () {}));
+            ScaffoldMessenger.of(context).showSnackBar(message);
           }),
           child: Text(
             generateRandomNumbers(),
