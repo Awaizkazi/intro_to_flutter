@@ -12,43 +12,77 @@ class SecondFile extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Container(
-              height: 500.0,
-              width: 300.0,
-              color: lightPurpleColor,
-              // alignment: const Alignment(0, 0),
-              // decoration: const BoxDecoration(
-              //   gradient: RadialGradient(
-              //     colors: [Colors.green, Colors.blue, Colors.orange, Colors.pink],
-              //     stops: [0.2, 0.5, 0.7, 1.0],
-              //     center: Alignment(0.1, 0.3),
-              //     focal: Alignment(-0.1, 0.6),
-              //   ),
-              // ),
-              // child: GestureDetector(
-              //   onTap: (() {
-              //     final message = SnackBar(
-              //         content: const Text(
-              //           'It was pressed',
-              //         ),
-              //         action: SnackBarAction(label: 'Undo', onPressed: () {}));
-              //     ScaffoldMessenger.of(context).showSnackBar(message);
-              //   }),
-              //   child: Text(
-              //     generateRandomNumbers(),
-              //     textDirection: TextDirection.ltr,
-              //     style: const TextStyle(
-              //         fontSize: 15.0,
-              //         color: Colors.white,
-              //         fontWeight: FontWeight.bold),
-              //   ),
-              // ),
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    color: Colors.purple,
+                    child: const Text(
+                      'Expanded',
+                      style: TextStyle(fontSize: 22.0),
+                    ),
+                  ),
+                ),
+                Flexible(
+                  child: Container(
+                    color: Colors.blueAccent,
+                    child: const Text(
+                      'Flexible',
+                      style: TextStyle(fontSize: 22.0),
+                    ),
+                  ),
+                ),
+              ],
             ),
-            Container(
-              width: 100.0,
-              height: 500.0,
-              color: Colors.green,
+            // Both are Flexible Widgetss
+            Row(
+              children: [
+                Flexible(
+                  child: Container(
+                    color: Colors.yellow,
+                    child: const Text(
+                      'Flexible',
+                      style: TextStyle(fontSize: 22.0),
+                    ),
+                  ),
+                ),
+                Flexible(
+                  child: Container(
+                    color: Colors.yellow,
+                    child: const Text(
+                      'Flexible',
+                      style: TextStyle(fontSize: 22.0),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            // Both are Expanded Widgets
+            Row(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                    color: Colors.green,
+                    child: const Text(
+                      'Expanded',
+                      style: TextStyle(fontSize: 22.0),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 3,
+                  child: Container(
+                    color: Colors.redAccent,
+                    child: const Text(
+                      'Expanded',
+                      style: TextStyle(fontSize: 22.0),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
