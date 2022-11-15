@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:intro_to_flutter/second_file.dart';
+import 'package:intro_to_flutter/first_file.dart';
+// import 'package:intro_to_flutter/second_file.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,15 +18,13 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           actions: [Icon(Icons.logout)],
           centerTitle: true,
-          // elevation: 10.0,
-
           title: const Text('Title'),
-          bottom: PreferredSize(
-            child: Text('This is a text in AppBar'),
+          bottom: const PreferredSize(
             preferredSize: Size.fromHeight(20),
+            child: Text('This is a text in AppBar'),
           ),
         ),
-        body: SecondFile(),
+        body: FirstScreen(),
       ),
     );
   }
