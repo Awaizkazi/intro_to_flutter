@@ -17,6 +17,8 @@ class FirstScreen extends StatefulWidget {
 
 class _FirstScreenState extends State<FirstScreen> {
   String maritalStatus = 'single';
+  // * //This key will be used to identify the state of the form.
+  final _formKey = GlobalKey<FormState>();
   bool isChecked = false;
   String dropdownValue = locations.first;
   @override
@@ -27,92 +29,112 @@ class _FirstScreenState extends State<FirstScreen> {
         centerTitle: true,
         actions: [Icon(Icons.logout)],
       ),
-      body: Container(
-        margin: EdgeInsets.symmetric(horizontal: 10.0),
-        child: Form(
-          child: Column(
-            children: [
-              TextFormField(
-                decoration: InputDecoration(
-                  hintText: 'Name',
-                  labelText: 'Enter name',
-                ),
-              ),
-              TextFormField(
-                decoration: InputDecoration(
-                  hintText: 'Age',
-                  labelText: 'Enter Age',
-                ),
-                keyboardType: TextInputType.number,
-              ),
-              TextFormField(
-                decoration: InputDecoration(
-                  hintText: 'Password',
-                  labelText: 'Enter Password',
-                ),
-                obscureText: true,
-              ),
-              DropdownButton(
-                hint: Text('Please choose the city you live in'),
-                items: locations.map((String location) {
-                  // ! Here location is act like a var which Stores Dropdown item which i select
-                  return DropdownMenuItem(
-                    child: Text(location),
-                    value: location,
-                  );
-                }).toList(),
-                onChanged: (String? location) {
-                  // This is called when the user selects an item.
-                  setState(() {
-                    dropdownValue = location!;
-                  });
-                },
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.min,
+      body: ListView(
+        children: [
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 10.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
                 children: [
-                  Expanded(
-                    child: RadioListTile(
-                      title: Text('Single'),
-                      value: 'single',
-                      groupValue: maritalStatus,
-                      onChanged: (value) {
+                  TextFormField(
+                    decoration: InputDecoration(
+                      hintText: 'Name',
+                      labelText: 'Enter name',
+                    ),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return '*required';
+                      }
+                    },
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      hintText: 'Age',
+                      labelText: 'Enter Age',
+                    ),
+                    keyboardType: TextInputType.number,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return '*required';
+                      }
+                    },
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      hintText: 'Password',
+                      labelText: 'Enter Password',
+                    ),
+                    obscureText: true,
+                    validator: (value) {
+                      if (value!.isEmpty) return '*required';
+                      if (value.length < 8)
+                        return 'Password should me more than 8 characters';
+                    },
+                  ),
+                  DropdownButton(
+                    hint: Text('Please choose the city you live in'),
+                    items: locations.map((String location) {
+                      // ! Here location is act like a var which Stores Dropdown item which i select
+                      return DropdownMenuItem(
+                        child: Text(location),
+                        value: location,
+                      );
+                    }).toList(),
+                    onChanged: (String? location) {
+                      // This is called when the user selects an item.
+                      setState(() {
+                        dropdownValue = location!;
+                      });
+                    },
+                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Expanded(
+                        child: RadioListTile(
+                          title: Text('Single'),
+                          value: 'single',
+                          groupValue: maritalStatus,
+                          onChanged: (value) {
+                            isChecked = !isChecked;
+                          },
+                        ),
+                      ),
+                      Expanded(
+                        child: RadioListTile(
+                          title: Text('Married'),
+                          value: 'married',
+                          groupValue: maritalStatus,
+                          onChanged: (value) {
+                            isChecked = !isChecked;
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  CheckboxListTile(
+                    value: isChecked,
+                    controlAffinity: ListTileControlAffinity.leading,
+                    onChanged: ((value) {
+                      setState(() {
                         isChecked = !isChecked;
-                      },
+                      });
+                    }),
+                    title: Text(
+                      'Sign up for the newspaper and related articles',
+                      style: TextStyle(fontSize: 14),
                     ),
                   ),
-                  Expanded(
-                    child: RadioListTile(
-                      title: Text('Married'),
-                      value: 'married',
-                      groupValue: maritalStatus,
-                      onChanged: (value) {
-                        isChecked = !isChecked;
-                      },
-                    ),
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: Text('Register'),
                   ),
                 ],
               ),
-              CheckboxListTile(
-                value: isChecked,
-                controlAffinity: ListTileControlAffinity.leading,
-                onChanged: ((value) {
-                  setState(() {
-                    isChecked = !isChecked;
-                  });
-                }),
-                title: Text(
-                  'Sign up for the newspaper and related articles',
-                  style: TextStyle(fontSize: 14),
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {},
-                child: Text('Register'),
-              ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
