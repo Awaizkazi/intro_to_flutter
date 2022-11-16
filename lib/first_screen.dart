@@ -16,11 +16,18 @@ class FirstScreen extends StatefulWidget {
 }
 
 class _FirstScreenState extends State<FirstScreen> {
-  String maritalStatus = 'single';
-  // * //This key will be used to identify the state of the form.
+  // String maritalStatus = 'single';
+  // * This key will be used to identify the state of the form.
   final _formKey = GlobalKey<FormState>();
   bool isChecked = false;
   String dropdownValue = locations.first;
+
+  String name = '';
+  int age = 0;
+  String password = '';
+  String maritalStatus = 'single';
+  bool termsChecked = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
