@@ -102,6 +102,7 @@ class _FirstScreenState extends State<FirstScreen> {
                       // This is called when the user selects an item.
                       setState(() {
                         selectedLocation = newValue!;
+                        // Set state use for the re-build 
                       });
                     },
                   ),
