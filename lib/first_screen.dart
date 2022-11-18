@@ -92,7 +92,7 @@ class _FirstScreenState extends State<FirstScreen> {
                   DropdownButton(
                     hint: Text('Please choose the city you live in'),
                     items: locations.map((String location) {
-                      //  Here location is act like a var which Stores Dropdown item which i select
+                      // ! Here location is act like a var which Stores Dropdown item which i select
                       return DropdownMenuItem(
                         child: Text(location),
                         value: location,
