@@ -20,7 +20,7 @@ class _FirstScreenState extends State<FirstScreen> {
   // * This key will be used to identify the state of the form.
   final _formKey = GlobalKey<FormState>();
   bool isChecked = false;
-  String dropdownValue = locations.first;
+  String selectedLocation = locations.first;
 
   String name = '';
   int age = 0;
@@ -54,6 +54,11 @@ class _FirstScreenState extends State<FirstScreen> {
                         return '*required';
                       }
                     },
+                    onSaved: (newValue) {
+                      setState(() {
+                        name = newValue!;
+                      });
+                    },
                   ),
                   TextFormField(
                     decoration: InputDecoration(
@@ -65,6 +70,11 @@ class _FirstScreenState extends State<FirstScreen> {
                       if (value!.isEmpty) {
                         return '*required';
                       }
+                    },
+                    onSaved: (newValue) {
+                      setState(() {
+                        age = int.tryParse(newValue!)!;
+                      });
                     },
                   ),
                   TextFormField(
@@ -88,10 +98,10 @@ class _FirstScreenState extends State<FirstScreen> {
                         value: location,
                       );
                     }).toList(),
-                    onChanged: (String? location) {
+                    onChanged: (String? newValue) {
                       // This is called when the user selects an item.
                       setState(() {
-                        dropdownValue = location!;
+                        selectedLocation = newValue!;
                       });
                     },
                   ),
@@ -104,7 +114,7 @@ class _FirstScreenState extends State<FirstScreen> {
                           value: 'single',
                           groupValue: maritalStatus,
                           onChanged: (value) {
-                            isChecked = !isChecked;
+                            maritalStatus = value!;
                           },
                         ),
                       ),
@@ -114,7 +124,7 @@ class _FirstScreenState extends State<FirstScreen> {
                           value: 'married',
                           groupValue: maritalStatus,
                           onChanged: (value) {
-                            isChecked = !isChecked;
+                            maritalStatus = value!;
                           },
                         ),
                       ),
@@ -125,7 +135,7 @@ class _FirstScreenState extends State<FirstScreen> {
                     controlAffinity: ListTileControlAffinity.leading,
                     onChanged: ((value) {
                       setState(() {
-                        isChecked = !isChecked;
+                        isChecked = value!;
                       });
                     }),
                     title: Text(
@@ -134,7 +144,9 @@ class _FirstScreenState extends State<FirstScreen> {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      onPressedSubmit(context);
+                    },
                     child: Text('Register'),
                   ),
                 ],
@@ -144,5 +156,18 @@ class _FirstScreenState extends State<FirstScreen> {
         ],
       ),
     );
+  }
+
+  void onPressedSubmit(BuildContext context) {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+
+      print('Name : ' + name);
+      print('Age : ' + age.toString());
+      print('City : ' + selectedLocation);
+      print('Marital Status : ' + maritalStatus);
+      print('Password : ' + password);
+      print('IsChecked : ' + isChecked.toString());
+    }
   }
 }
